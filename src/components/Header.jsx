@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Badge,
+  Button,
   Container,
   Dropdown,
   FormControl,
@@ -32,7 +33,7 @@ function Header() {
             />
           </Navbar.Text>
           <Nav>
-            <Dropdown alignRight>
+            <Dropdown alignLeft>
               <Dropdown.Toggle variant="success">
                 <FaShoppingCart color="white" fontSize="25px" />
                 <Badge>{cart.length}</Badge>
@@ -44,9 +45,10 @@ function Header() {
                     {cart.map((prod) => {
                       return (
                         <>
-                          <span key={prod.id}>
-                            <img  src={prod.image}  alt={prod.name}/>
-                            <div>
+                          <span key={prod.id} style={{display:'flex', gap:"20px", justifyContent:'space-between',
+                        alignItems:'center', marginTop:'10px'}}>
+                            <img  src={prod.image}  alt={prod.name} style={{width:"100px", height:"100px"}}/>
+                            <div style={{display:'flex', flexDirection:'column'}}>
                               <span>{prod.name}</span>
                               <span>${prod.price.split(".")[0]}</span>
                             </div>
@@ -57,11 +59,14 @@ function Header() {
                                     payload:prod
                                 })
                             }}/>
+
+                            
                           </span>
-                          ;
+                          
                         </>
                       );
                     })}
+                    <Button><Link to='/cart'>Go to cart</Link></Button>
                   </>
                 ) : (
                   <span style={{ padding: 10 }}> Cart is Empty !</span>
